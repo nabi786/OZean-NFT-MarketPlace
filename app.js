@@ -6,21 +6,22 @@ const app = express()
 const PORT = process.env.PORT
 const morgan = require('morgan')
 const cors = require('cors')
+const fileUpload = require("express-fileupload");
+const path = require('path')
 
 app.use(morgan('dev'))
-
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use(cors())
 
 // Routes
-const indexRouter = require('./routers/indexRoute')
+const profileRoute = require('./routers/profile')
 
-// middlewares
-app.use(indexRouter)
-
+app.use('/api',profileRoute)
 
 
+// express fiel upload
+app.use(fileUpload());
 
 
 
