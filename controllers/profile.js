@@ -2,34 +2,35 @@
 
 // importing profile moddle
 const models = require('../models/model')
-
+const path = require('path')
 
 // create profile
 const createuser = async (req, res) => {
     try {
-        const check = await models.userModel.find({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', "$options": "i" } })
+        // const check = await models.userModel.find({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', "$options": "i" } })
 
-        console.log(req.files)
-
+        
+            console.log(req.body)
+        check = null
         if (check != null && check != undefined && check.length != 0) {
             res.status(200).json({ success: false, msg: "wallet Address is already exist" })
         }
          
-        if(check.length == 0) {
-            // creating new profile
-            const newProfile = models.userModel({
-                userName: req.body.userName,
-                walletAddress: req.body.walletAddress,
-                description: req.body.background,
-                twitter: req.body.twitter,
-                facebook: req.body.facebook,
-                instagram: req.body.instagram,
-            })
+        // if(check.length == 0) {
+        //     // creating new profile
+        //     const newProfile = models.userModel({
+        //         userName: req.body.userName,
+        //         walletAddress: req.body.walletAddress,
+        //         description: req.body.background,
+        //         twitter: req.body.twitter,
+        //         facebook: req.body.facebook,
+        //         instagram: req.body.instagram,
+        //     })
 
             
-            // await newProfile.save()
+        //     // await newProfile.save()
             res.status(200).json({ success: true, msg: "profile created successfully" })
-        }
+        // }
         
 
     } catch (error) {
