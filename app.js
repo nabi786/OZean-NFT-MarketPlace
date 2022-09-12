@@ -1,5 +1,6 @@
 
 require('dotenv').config()
+require('./config/database')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT
@@ -13,15 +14,13 @@ app.use(express.urlencoded({extended : false}))
 
 
 
-// 
-app.get('/', async(req,res)=>{
-    try {
-        
-        res.status(200).json({msg : "Ozean backend working successfully"})
-    } catch (error) {
+// Routes
+const indexRouter = require('./routers/indexRoute')
 
-    }
-})
+// middlewares
+app.use(indexRouter)
+
+
 
 
 
