@@ -7,6 +7,9 @@ const auth = (req,res,next)=>{
     var bearerToken = req.headers['token']
     if(bearerToken){
 
+        
+        // working..
+
         next()
     }else{
         res.status(500).json({msg : "invalid token"})

@@ -7,9 +7,16 @@ const imgUpload = require('../middleware/imgUpload')
 // create collection post method
 router.post('/collection/:ownerID',imgUpload.array('img', 10), collectionOBj.createCollection)
 
+// get Single Collection
+router.get('/collection/:collectionID',collectionOBj.getSingleCollection )
 
 
+// update Collection
+router.patch('/collection/:collectionID',imgUpload.array('Img', 10), collectionOBj.updateCollection)
+
+// delete collection
+router.delete('/collection/:collectionID', collectionOBj.deleteCollection)
 
 
-
+// exporting module
 module.exports = router

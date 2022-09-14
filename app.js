@@ -20,14 +20,15 @@ app.use(cors())
 const profileRoute = require('./routers/profile')
 const adminRegistration = require('./routers/adminRegistration')
 const collectionRoutes = require('./routers/collections')
+const nftRouter = require('./routers/NFTRoutes')
 
 
 app.use('/api',profileRoute)
 app.use('/api',adminRegistration)
 app.use('/api',collectionRoutes)
+app.use('/api',nftRouter)
 
 // express fiel upload
-
 
 
 // listening app on this port number (this is server)

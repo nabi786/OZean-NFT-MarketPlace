@@ -18,12 +18,20 @@ router.delete('/admin', admin.deleteAdmin)
 
 
 
-// get all Admins
+// get all Admin
 router.get('/admin', admin.getAllAdmins)
 
 
 // getSingle Admin by walletAddress
 router.get('/admin/:walletAddress', admin.getSingleAdmin)
+
+
+
+
+// login admin
+router.post('/admin-login', admin.adminLogin )
+
+
 
 
 // exporting module

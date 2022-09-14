@@ -1,3 +1,4 @@
+const { required } = require('joi')
 const mongoose = require('mongoose')
 
 
@@ -47,8 +48,15 @@ const userSchema = new mongoose.Schema({
     },
     Collections : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : "collections"
-    }]
+        ref : "collections",
+        required : true
+    }],
+    Nfts : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "NFts"
+        }
+    ]
 }, { timestamps: true })
 
 
@@ -84,15 +92,11 @@ const adminSchema = mongoose.Schema({
 
 
 
-
-
-
 // create collection Schema
 const collectionSchema = mongoose.Schema({
     name : {
         type : String,
         required : true,
-      
     },
     owner : {
         type : mongoose.Schema.Types.ObjectId,
@@ -107,8 +111,66 @@ const collectionSchema = mongoose.Schema({
     },
     description : {
         type : String
+    },
+    category : {
+        type : String
     }
 },{ timestamps: true })
+
+
+
+
+
+// nft controll Schema; 
+const nftControllerSchema = mongoose.Schema({
+
+    tokenAddress : {
+        type : String,
+        required : true,
+    },
+    tokenID : {
+        type : String,
+        required : true,
+    },
+    chainID : {
+        type : String,
+    },
+    tokenUri : {
+        type: String,
+    },
+    Price : {
+        type : Number,
+        required : [true, 'price must be added']
+    },
+    owner : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "user",
+    },
+    NFTImg : {
+        type : String
+    },
+    NftTitle :  {
+        type : String,
+        required : [true, "nft title must be added"]
+    },
+    description : {
+        type : String
+    },
+    category : {
+        type : String,
+        required : true
+    },
+    isOnSell : {
+        type : Boolean,
+        default:false
+    }
+
+})
+
+
+
+
+
 
 
 
@@ -126,14 +188,17 @@ const admin = mongoose.model('admin', adminSchema)
 
 
 // collection model
-const collection = mongoose.model('collections', collectionSchema)
+const collection =  mongoose.model('collections', collectionSchema)
+
+const nfts = new mongoose.model('NFts', nftControllerSchema)
 
 
 // exporint models
 const modles = {
     userModel: user,
     adminModel: admin,
-    collectionModel : collection
+    collectionModel : collection,
+    nfts : nfts
 }
 
 
