@@ -39,7 +39,12 @@ const createNft = async (req, res) => {
 
             })
 
+            // getting Owner and adding Nft ID to his model
+            var currentUser = await models.userModel.findOne({_id : req.params.ownerID})
+            currentUser.Nfts.push(newNft._id)
+
             await newNft.save()
+            currentUser.save()
             res.status(200).json({ success: true, message: 'nft created' })
         }
     } catch (error) {
@@ -51,9 +56,7 @@ const createNft = async (req, res) => {
 
 
 
-
-
-// getAll Nfts
+// getAll Nfts (with Pagination)
 const getAllNfts = async (req,res)=>{
 
     try{
@@ -83,6 +86,16 @@ const getAllNfts = async (req,res)=>{
         res.status(500).json({success : false, msg : "server error", err : err})
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

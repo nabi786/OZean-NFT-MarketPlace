@@ -132,20 +132,18 @@ const getSingleUser = async (req,res)=>{
     try {
 
         var walletAddress = req.params.walletAddress;
-        const findUser = await userModel.findOne({walletAddress : {'$regex' : '^' + walletAddress + '$', '$options' : 'i'}})
+        const findUser = await models.userModel.findOne({walletAddress : {'$regex' : '^' + walletAddress + '$', '$options' : 'i'}})
         
-        console.log(findUser)
-        if(!findUser){
 
+        if(!findUser){
             res.status(200).json({success : false, msg : "no user found with this walletAddress"})
         }else{
-
             res.status(200).json({success : true, user : findUser})
         }
 
         
     } catch (error) {
-        res.status(500).json({success : false, msg : "something went wrong in server", err : error})
+        res.status(500).json({success : false, msg : "server Error", err : error})
     }
 }
 
