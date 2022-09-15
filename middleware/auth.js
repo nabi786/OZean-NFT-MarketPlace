@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const auth = (req,res,next)=>{
 
     var bearerToken = req.headers['token']
+    
     if(bearerToken){
 
         

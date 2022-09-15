@@ -12,7 +12,7 @@ router.post('/nftsForSell', nftObj.getAllNfts)
 // getSingle nft
 router.post('/singleNft', nftObj.getSingleNft)
 
-// add NFT On Sell
+// set NFT On Sell
 router.patch('/nftToSell', nftObj.setNftToSell)
 
 //(Get Single User Nfts) that not all Sale
@@ -20,6 +20,12 @@ router.post('/singleUserNfts', nftObj.singleUserNfts)
 
 // (get Single User NFts) that On Sell
 router.post('/singleUserNftOneSell',  nftObj.getSingleUserNftOnSell)
+
+
+// get All Nfts liked by current User
+router.post('/getAllNftsThatUserLike', nftObj.nfts_I_Like)
+
+
 
 
 

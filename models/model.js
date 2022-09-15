@@ -62,6 +62,12 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "user"
         }
+    ],
+    MyLikes : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "NFts" 
+        }
     ]
 
 
@@ -185,6 +191,7 @@ const nftControllerSchema = mongoose.Schema({
         type: Number,
         default: '0'
     }
+
 
 },{ timestamps: true })
 

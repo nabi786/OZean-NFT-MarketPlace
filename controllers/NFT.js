@@ -220,6 +220,19 @@ const getSingleUserNftOnSell = async (req, res) => {
 
 
 
+//  Get All nfts that User LIked
+const nfts_I_Like = async(req,res)=>{
+    try {
+        
+        const MyLikedNfts = await models.userModel.findOne({walletAddress : {"$regex" : "^" + req.body.walletAddress+"$", "$options" : "i"}}).populate('MyLikes')
+
+        res.status(200).json({success : true, data : MyLikedNfts.MyLikes})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({success : false, msg : 'server error'})
+    }
+}
+
 
 
 
@@ -240,7 +253,8 @@ const nftObj = {
     getSingleNft: getSingleNft,
     setNftToSell: setNftToSell,
     singleUserNfts: singleUserNfts,
-    getSingleUserNftOnSell: getSingleUserNftOnSell
+    getSingleUserNftOnSell: getSingleUserNftOnSell,
+    nfts_I_Like : nfts_I_Like
 }
 
 // exporting whole object using module the export

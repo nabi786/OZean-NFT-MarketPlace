@@ -4,6 +4,7 @@ const UserObj = require('../controllers/profile')
 const imgUpload = require('../middleware/imgUpload')
 
 
+
 // create profile
 router.post('/profile',imgUpload.array('userImgs', 2), UserObj.createuser)
 
@@ -19,4 +20,5 @@ router.get('/profile/:walletAddress', UserObj.getSingleUser)
 
 
 
+// exporting Module
 module.exports = router
