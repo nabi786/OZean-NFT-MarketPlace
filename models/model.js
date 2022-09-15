@@ -193,7 +193,9 @@ const nftControllerSchema = mongoose.Schema({
     }
 
 
-},{ timestamps: true })
+},{ 
+    timestamps: true 
+})
 
 
 
