@@ -40,6 +40,7 @@ const addLikes = async (req,res)=>{
 
 
 
+
 // add Followers
 const addFollow = async (req,res)=>{
     try {
@@ -90,11 +91,17 @@ const addFollow = async (req,res)=>{
 
 
 
+
+
+
 // making object of all functions
 const likeObj = {
     addLikes : addLikes,
     addFollow : addFollow,
 }
+
+
+
 
 
 

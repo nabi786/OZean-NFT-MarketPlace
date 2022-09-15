@@ -31,7 +31,7 @@ app.use('/api',nftRouter)
 app.use('/api',viewAndLikes)
 
 
-// express fiel upload
+// express fiel uploads
 
 
 // listening app on this port number (this is server)
