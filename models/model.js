@@ -1,4 +1,3 @@
-const { required } = require('joi')
 const mongoose = require('mongoose')
 
 
@@ -32,12 +31,6 @@ const userSchema = new mongoose.Schema({
     instagram: {
         type: String,
     },
-    Followers: {
-        type: Array
-    },
-    Following: {
-        type: Array
-    },
     isVarified: {
         type: Boolean,
         default: false
@@ -46,17 +39,31 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    Collections : [{
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "collections",
-        required : true
+    Collections: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "collections",
+        required: true
     }],
-    Nfts : [
+    Nfts: [
         {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "NFts"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "NFts"
+        }
+    ],
+    FollowedBy: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user"
+        }
+    ],
+    MyFollowing: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user"
         }
     ]
+
+
 }, { timestamps: true })
 
 
@@ -94,28 +101,28 @@ const adminSchema = mongoose.Schema({
 
 // create collection Schema
 const collectionSchema = mongoose.Schema({
-    name : {
-        type : String,
-        required : true,
+    name: {
+        type: String,
+        required: true,
     },
-    owner : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "user",
-        required : true
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true
     },
-    avatar : {
-        type : String,
+    avatar: {
+        type: String,
     },
-    background : {
-        type : String,
+    background: {
+        type: String,
     },
-    description : {
-        type : String
+    description: {
+        type: String
     },
-    category : {
-        type : String
+    category: {
+        type: String
     }
-},{ timestamps: true })
+}, { timestamps: true })
 
 
 
@@ -124,45 +131,56 @@ const collectionSchema = mongoose.Schema({
 // nft controll Schema; 
 const nftControllerSchema = mongoose.Schema({
 
-    tokenAddress : {
-        type : String,
-        required : true,
+    tokenAddress: {
+        type: String,
+        required: true,
     },
-    tokenID : {
-        type : String,
-        required : true,
+    tokenID: {
+        type: String,
+        required: true,
     },
-    chainID : {
-        type : String,
-    },
-    tokenUri : {
+    chainID: {
         type: String,
     },
-    Price : {
-        type : Number,
-        required : [true, 'price must be added']
+    tokenUri: {
+        type: String,
     },
-    owner : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "user",
+    Price: {
+        type: Number,
+        required: [true, 'price must be added']
     },
-    NFTImg : {
-        type : String
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
     },
-    NftTitle :  {
-        type : String,
-        required : [true, "nft title must be added"]
+    NFTImg: {
+        type: String
     },
-    description : {
-        type : String
+    NftTitle: {
+        type: String,
+        required: [true, "nft title must be added"]
     },
-    category : {
-        type : String,
-        required : true
+    description: {
+        type: String
     },
-    isOnSell : {
-        type : Boolean,
-        default:false
+    category: {
+        type: String,
+        required: true
+    },
+    isOnSell: {
+        type: Boolean,
+        default: false
+    },
+    LikedBy: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user"
+    }],
+    Likes: {
+        type: String
+    },
+    Views: {
+        type: Number,
+        default: '0'
     }
 
 })
@@ -188,7 +206,7 @@ const admin = mongoose.model('admin', adminSchema)
 
 
 // collection model
-const collection =  mongoose.model('collections', collectionSchema)
+const collection = mongoose.model('collections', collectionSchema)
 
 const nfts = new mongoose.model('NFts', nftControllerSchema)
 
@@ -197,8 +215,8 @@ const nfts = new mongoose.model('NFts', nftControllerSchema)
 const modles = {
     userModel: user,
     adminModel: admin,
-    collectionModel : collection,
-    nfts : nfts
+    collectionModel: collection,
+    nfts: nfts
 }
 
 
