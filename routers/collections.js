@@ -5,7 +5,7 @@ const imgUpload = require('../middleware/imgUpload')
 
 
 // create collection post method
-router.post('/collection/:ownerID',imgUpload.array('img', 10), collectionOBj.createCollection)
+router.post('/collection/',imgUpload.array('img', 10), collectionOBj.createCollection)
 
 // get Single Collection
 router.get('/collection/:collectionID',collectionOBj.getSingleCollection )

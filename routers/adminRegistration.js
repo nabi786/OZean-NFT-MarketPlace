@@ -26,10 +26,8 @@ router.get('/admin', admin.getAllAdmins)
 router.get('/admin/:walletAddress', admin.getSingleAdmin)
 
 
-
-
 // login admin
-router.post('/admin-login', admin.adminLogin )
+router.post('/admin-login', admin.adminLogin)
 
 
 

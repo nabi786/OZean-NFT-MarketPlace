@@ -8,7 +8,7 @@ router.post('/addlikes', likesAndFollow.addLikes)
 
 
 
-// add Followers
+// add Followers (this api will follow and unfollow the user by calling aganin and again)
 router.post('/addFollower', likesAndFollow.addFollow)
 
 

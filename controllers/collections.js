@@ -8,9 +8,6 @@ const cloudinary = require('../config/cloudinary')
 const createCollection = async (req, res) => {
     try {
 
-        const ownerID = req.params.ownerID;
-
-
 
         // uploading images on cloudinary
         var profileImg = "";
@@ -28,18 +25,18 @@ const createCollection = async (req, res) => {
         }
 
 
-
+       
         const newCollection = models.collectionModel({
             name: req.body.name,
             description: req.body.description,
-            owner: ownerID,
+            owner: req.body.ownerID,
             avatar: profileImg,
             background: backgroundImg,
             category : req.body.category
         })
 
         // find if body.name is already exist in databse
-        const user = await models.userModel.findOne({ _id: ownerID })
+        const user = await models.userModel.findOne({_id: req.body.ownerID})
         user.Collections.push(newCollection._id)
 
         //  saving user

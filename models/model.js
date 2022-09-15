@@ -39,11 +39,12 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    Collections: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "collections",
-        required: true
-    }],
+    Collections: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "collections",
+        }
+    ],
     Nfts: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -65,7 +66,6 @@ const userSchema = new mongoose.Schema({
 
 
 }, { timestamps: true })
-
 
 
 
@@ -121,7 +121,8 @@ const collectionSchema = mongoose.Schema({
     },
     category: {
         type: String
-    }
+    },
+
 }, { timestamps: true })
 
 
@@ -171,10 +172,12 @@ const nftControllerSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    LikedBy: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
-    }],
+    LikedBy: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user"
+        }
+    ],
     Likes: {
         type: String
     },
@@ -183,7 +186,7 @@ const nftControllerSchema = mongoose.Schema({
         default: '0'
     }
 
-})
+},{ timestamps: true })
 
 
 

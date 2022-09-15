@@ -71,8 +71,6 @@ const addFollow = async (req,res)=>{
             currentProfile.FollowedBy.splice(findIndex,1)
             currentUser.MyFollowing.splice(findIndex2,1)
 
-            console.log( currentProfile.FollowedBy)
-            console.log(  currentUser.MyFollowing)
 
             currentUser.save()
             currentProfile.save()
