@@ -93,11 +93,11 @@ const getAllNfts = async (req,res)=>{
 
 
 
-// get Single NFT
+// get Single NFTs
 const getSingleNft = async(req,res)=>{
     try {
 
-        
+
         
         res.status(200).json({success : true})
     } catch (error) {
