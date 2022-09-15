@@ -11,15 +11,18 @@ const addLikes = async (req,res)=>{
             var currentNft = await models.nfts.findOne({tokenID : req.body.tokenID})
            
             var findIndex = currentNft.LikedBy.indexOf(currentUser._id)
-            
+
+
             if(findIndex == -1){
 
                 currentNft.LikedBy.push(currentUser._id)
 
+                currentUser.MyLikes.push(currentNft._id)
+
                 currentNft.Likes = currentNft.LikedBy.length
                 
                 currentNft.save()
-
+                currentUser.save()
                 
                 res.status(200).json({success : true, msg: "like added successfully"})
 
@@ -28,7 +31,13 @@ const addLikes = async (req,res)=>{
                 
                 currentNft.LikedBy.splice(findIndex,1)
                 currentNft.Likes = currentNft.LikedBy.length
+
+                var findIndex2 = currentUser.MyLikes.indexOf(currentNft._id)
+                currentUser.MyLikes.splice(findIndex2,1)
+
                 currentNft.save()
+                currentUser.save()
+                
                 res.status(200).json({success : true, msg: "like removed successfully"})
             }
 
