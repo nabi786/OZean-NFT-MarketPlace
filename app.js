@@ -21,7 +21,7 @@ const profileRoute = require('./routers/profile')
 const adminRegistration = require('./routers/adminRegistration')
 const collectionRoutes = require('./routers/collections')
 const nftRouter = require('./routers/NFTRoutes')
-const viewAndLikes = require("./routers/likes")
+const viewAndLikes = require("./routers/likesAndFollow.js")
 
 // USE ROUTES AS GLOBARL MIDDLEWARE
 app.use('/api',profileRoute)
@@ -29,6 +29,7 @@ app.use('/api',adminRegistration)
 app.use('/api',collectionRoutes)
 app.use('/api',nftRouter)
 app.use('/api',viewAndLikes)
+
 
 // express fiel upload
 

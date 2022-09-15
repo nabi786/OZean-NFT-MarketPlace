@@ -4,13 +4,14 @@ const imgUpload = require('../middleware/imgUpload')
 
 
 // create nft post method
-router.post('/nft/:ownerID', imgUpload.single('NFTImg') ,nftObj.createNft)
-
-
-
+router.post('/createNft/:ownerID', imgUpload.single('NFTImg') ,nftObj.createNft)
 
 // get All Nfts 
-router.post('/nft', nftObj.getAllNfts)
+router.post('/allNft', nftObj.getAllNfts)
+
+// getSingle nft
+router.post('/singleNft', nftObj.getSingleNft)
+
 
 
 // exporting module

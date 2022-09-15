@@ -35,7 +35,6 @@ const createNft = async (req, res) => {
                 description: req.body.description,
                 category: req.body.category,
                 isOnSell: req.body.isOnSell,
-                category : req.body.category
 
             })
 
@@ -97,9 +96,23 @@ const getAllNfts = async (req,res)=>{
 const getSingleNft = async(req,res)=>{
     try {
 
+        if(!req.body.tokenAddress || !req.body.tokenID){
+            res.status(200).json({msg : "inalid payload"})
+        }else{
+            
+            var currentNft = await models.nfts.findOne({tokenAddress : {'$regex' : "^"+req.body.tokenAddress+'$', "$options" : 'i'}, tokenID : req.body.tokenID})
+            
+            if(!currentNft){
+                res.status(404).json({msg : 'data not found'})
+            }else{
+
+                currentNft.Views = currentNft.Views+1
+                currentNft.save()
+                res.status(200).json({success : true, data : currentNft})
+            }
+        }
 
         
-        res.status(200).json({success : true})
     } catch (error) {
         res.status(500).json({success : false, msg : "server error"})
     }
