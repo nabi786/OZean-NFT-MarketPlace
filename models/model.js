@@ -56,7 +56,9 @@ const userSchema = new mongoose.Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref : "NFts"
         }
-    ]
+    ],
+
+
 }, { timestamps: true })
 
 
@@ -163,6 +165,16 @@ const nftControllerSchema = mongoose.Schema({
     isOnSell : {
         type : Boolean,
         default:false
+    },
+    LikedBy : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "user"
+    }],
+    Likes : {
+        type : String
+    },
+    Views : {
+        type : String
     }
 
 })

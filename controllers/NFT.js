@@ -93,6 +93,18 @@ const getAllNfts = async (req,res)=>{
 
 
 
+// get Single NFT
+const getSingleNft = async(req,res)=>{
+    try {
+
+        
+        
+        res.status(200).json({success : true})
+    } catch (error) {
+        res.status(500).json({success : false, msg : "server error"})
+    }
+}
+
 
 
 
@@ -105,7 +117,8 @@ const getAllNfts = async (req,res)=>{
 // creating OBject
 const nftObj = {
     createNft: createNft,
-    getAllNfts : getAllNfts
+    getAllNfts : getAllNfts,
+    getSingleNft : getSingleNft
 }
 
 // exporting whole object using module the export
