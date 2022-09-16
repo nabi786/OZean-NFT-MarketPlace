@@ -130,11 +130,11 @@ const getAllAdmins = async (req, res) => {
 const getSingleAdmin = async (req, res) => {
     try {
 
-        const address = req.params.walletAddress;
+        const address = req.admin;
         const currentAdmin = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + address + '$', '$options': 'i' } })
 
 
-        res.status(200).json({ success: true, data: currentAdmin })
+        res.status(200).json({ success: true,  data : currentAdmin})
     } catch (error) {
         res.status(500).json({ succeess: false, msg: "something went wrong in server" })
     }

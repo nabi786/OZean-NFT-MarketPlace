@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 const admin = require('../controllers/adminRegistration')
-
+const auth = require('../middleware/auth')
 
 // create Admin
 router.post('/admin', admin.adminRegister)
@@ -19,17 +19,17 @@ router.delete('/admin', admin.deleteAdmin)
 
 
 // get all Admin
-router.get('/admin', admin.getAllAdmins)
+// router.get('/admin', admin.getAllAdmins)
 
 
-// getSingle Admin by walletAddress
-router.get('/admin/:walletAddress', admin.getSingleAdmin)
 
 
 // login admin
 router.post('/admin-login', admin.adminLogin)
 
 
+// getSingle Admin by walletAddress
+router.get('/getSingleAdmin', auth, admin.getSingleAdmin)
 
 
 // exporting module
