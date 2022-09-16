@@ -22,8 +22,6 @@ router.delete('/admin', admin.deleteAdmin)
 // router.get('/admin', admin.getAllAdmins)
 
 
-
-
 // login admin
 router.post('/admin-login', admin.adminLogin)
 
