@@ -14,7 +14,6 @@ router.patch('/profile', UserObj.updateProfile)
 // delete Profile
 router.delete('/profile', UserObj.dltProfile)
 
-
 // get single profile
 router.get('/profile/:walletAddress', UserObj.getSingleUser)
 
