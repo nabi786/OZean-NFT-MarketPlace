@@ -8,6 +8,9 @@ const cloudinary = require('../config/cloudinary')
 
 
 // create profile
+
+
+
 const createuser = async (req, res) => {
     try {
 
@@ -21,15 +24,20 @@ const createuser = async (req, res) => {
             var profileImg = "";
             var coverImg = "";
 
-            if(req.files[0]){
-                profileImg = await cloudinary.v2.uploader.upload(req.files[0].path)
-                profileImg = profileImg.secure_url
+            if(req.files){
+                if(req.files[0]){
+                    profileImg = await cloudinary.v2.uploader.upload(req.files[0].path)
+                    profileImg = profileImg.secure_url
+                }else{
+                    profileImg = 'https://res.cloudinary.com/learn2code/image/upload/v1663070003/download_2_ehimo5.png'
+                }
+                
+                if(req.files[1]){
+                    coverImg = await cloudinary.v2.uploader.upload(req.files[1].path)
+                    coverImg =coverImg.secure_url
+                }
             }else{
                 profileImg = 'https://res.cloudinary.com/learn2code/image/upload/v1663070003/download_2_ehimo5.png'
-            }
-        
-            if(req.files[1]){
-                coverImg = await cloudinary.v2.uploader.upload(req.files[1].path)
             }
 
            
@@ -42,7 +50,7 @@ const createuser = async (req, res) => {
                 walletAddress: req.body.walletAddress,
                 description: req.body.description,
                 Avatar : profileImg,
-                background : coverImg.secure_url,
+                background : coverImg,
                 twitter: req.body.twitter,
                 facebook: req.body.facebook,
                 instagram: req.body.instagram,
