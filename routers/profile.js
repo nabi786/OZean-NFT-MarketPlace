@@ -17,7 +17,5 @@ router.delete('/profile', UserObj.dltProfile)
 // get single profile
 router.get('/profile/:walletAddress', UserObj.getSingleUser)
 
-
-
 // exporting Module
 module.exports = router
