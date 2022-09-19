@@ -10,13 +10,14 @@ const createNft = async (req, res) => {
     try {
 
         const filterNft = await models.nfts.findOne({ tokenAddress: { '$regex': '^' + req.body.tokenAddress + '$', '$options': 'i' }, tokenID: { '$regex': "^" + req.body.tokenID + '$', "$options": "i" } })
+        
 
         if (filterNft) {
             res.status(500).json({ success: false, msg: "nft already created" })
         } else {
 
             var nftImg = '';
-
+                
             if (req.file) {
                 nftImg = await cloudinary.v2.uploader.upload(req.file.path)
                 nftImg = nftImg.secure_url
@@ -131,7 +132,7 @@ const setNftToSell = async (req, res) => {
             res.status(500).json({ success: false, msg: "invalid payload" })
         } else {
 
-            await models.nfts.findOneAndUpdate({ tokenAddress: { '$regex': '^' + req.body.tokenAddress + '$', '$options': 'i' } }, {
+            await models.nfts.findOneAndUpdate({ tokenAddress: { '$regex': '^' + req.body.tokenAddress + '$', '$options': 'i' } , tokenID : req.body.tokenID}, {
                 isOnSell: true
             })
 
