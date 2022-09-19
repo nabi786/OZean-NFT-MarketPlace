@@ -134,7 +134,7 @@ const getSingleAdmin = async (req, res) => {
         // const address = req.body.walletAddress;
         const address = req.admin;
         const currentAdmin = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + address + '$', '$options': 'i' } })
-
+        
 
         res.status(200).json({ success: true,  data : currentAdmin})
     } catch (error) {
@@ -163,7 +163,7 @@ const adminLogin = async (req, res) => {
                 const token = jwt.sign({ walletAddress: adminData.walletAddress }, process.env.secretKey, {
                     expiresIn: "12 hours"
                 })
-                res.status(200).json(token)
+                res.status(200).json({token : token})
 
             } else {
                 res.status(400).json({ msg: "wallet Not Found" })

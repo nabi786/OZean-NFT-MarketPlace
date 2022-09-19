@@ -20,7 +20,7 @@ router.delete('/admin', admin.deleteAdmin)
 router.post('/admin-login', admin.adminLogin)
 
 // getSingle Admin by walletAddress
-router.get('/getSingleAdmin', admin.getSingleAdmin)
+router.get('/getSingleAdmin',auth, admin.getSingleAdmin)
 
 
 // exporting module

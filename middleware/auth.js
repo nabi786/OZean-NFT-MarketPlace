@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
     try {
 
         var bearerToken = req.headers['token']
-
+        
         if (bearerToken) {
             var decode = await jwt.verify(bearerToken, process.env.secretKey)
             req.admin = decode.walletAddress
