@@ -10,7 +10,7 @@ const vonage = new Vonage({
 })
 
 
-// send Message
+// send Messages
 const sendOTP = ()=>{
 
     const from = "Vonage APIs"
