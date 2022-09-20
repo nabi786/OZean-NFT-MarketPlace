@@ -4,6 +4,7 @@ require('./config/database')
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
+const sendMessage = require('./middleware/sendOTP')
 
 const express = require('express')
 const app = express()
@@ -11,8 +12,12 @@ const PORT = 3000
 const morgan = require('morgan')
 const cors = require('cors')
 
-const otpGenerator = require('otp-generator')
 
+
+// send messate for test
+
+
+// creating OTP
 
 
 

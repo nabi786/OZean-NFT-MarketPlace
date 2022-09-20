@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 
 
-
+// send Email 
 const varifyAdmin = async (subject, emailTo, message) => {
 
     // sending Email 

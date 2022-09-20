@@ -27,14 +27,17 @@ const adminRegister = async (req, res) => {
                     email: email
                 })
 
+
                 // Send Varification Email
                 var subject = 'Varify Email Address'
                 var emailTo = newAdmin.email
                 var message =  `<h2>Hi Mr ${newAdmin.name}</h2> <br> click link below to varify the email address and be the Admin of OZean NFT MarketPlace.<br>
                     <a href="http://localhost:3000/api/varify-admin/${newAdmin._id}">http://localhost:3000/api/varify-admin/${newAdmin._id}</a>
                 `
+
                 // sendnig email to varify Email
                 varifyAdmin(subject, emailTo, message)
+                
 
                 // admin save here
                 await newAdmin.save()
