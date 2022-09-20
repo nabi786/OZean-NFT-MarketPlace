@@ -97,6 +97,10 @@ const adminSchema = mongoose.Schema({
     email: {
         type: String,
         require: true
+    },
+    isVarify : {
+        type : Boolean,
+        default : false 
     }
 
 }, { timestamps: true })

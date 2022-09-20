@@ -4,13 +4,20 @@ require('./config/database')
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
-
+const sendMessage = require('./middleware/sendOTP')
 
 const express = require('express')
 const app = express()
 const PORT = 3000
 const morgan = require('morgan')
 const cors = require('cors')
+
+
+
+// send messate for test
+
+
+// creating OTP
 
 
 
@@ -64,19 +71,13 @@ app.use(IndexRouter)
 
 
 
-
-
-
 // Routes that not found in this app
 app.get('/', async (req, res) => {
     try {
-
         res.status(200).json({ msg: "Ozean backend is working successfully" })
     } catch (err) {
-
         res.status(500).json({ msg: "server error" })
     }
-
 })
 
 
