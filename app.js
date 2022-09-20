@@ -67,7 +67,6 @@ app.use(IndexRouter)
 
 
 
-
 // Routes that not found in this app
 app.get('/', async (req, res) => {
     try {
