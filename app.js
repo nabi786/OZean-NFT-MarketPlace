@@ -14,7 +14,7 @@ const cors = require('cors')
 
 
 
-// send messate for tests
+// send messate for just test
 
 
 // creating OTP
