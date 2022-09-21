@@ -45,7 +45,7 @@ const adminRegister = async (req, res) => {
                     <a href="http://localhost:3000/api/varify-admin/${newAdmin._id}">http://localhost:3000/api/varify-admin/${newAdmin._id}</a>
                 `
 
-                    // sendnig email to varify Email
+                    // sendnig email to varify Emails
                     varifyAdmin(subject, emailTo, message)
 
 

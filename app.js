@@ -14,11 +14,10 @@ const cors = require('cors')
 
 
 
-// send messate for test
+// send messate for just tests
 
 
 // creating OTP
-
 
 
 app.use(express.json())
