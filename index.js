@@ -8,7 +8,7 @@ const sendMessage = require('./middleware/sendOTP')
 
 const express = require('express')
 const app = express()
-const PORT = 3000 || process.env.port
+const PORT = 3000 || process.env.PORT
 const morgan = require('morgan')
 const cors = require('cors')
 
