@@ -30,7 +30,7 @@ const options = {
         },
         servers: [
             {
-                url: `http://localhost:${PORT}/`
+                url: `https://test-ozean-app.herokuapp.com:${PORT}/`
             }
         ]
 
