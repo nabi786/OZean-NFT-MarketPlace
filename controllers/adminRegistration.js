@@ -1,7 +1,7 @@
 const modles = require('../models/model')
 const jwt = require('jsonwebtoken')
 const varifyAdmin = require('../middleware/varifyEmail')
-
+const validation = require('../middleware/validation')
 
 
 
@@ -10,48 +10,57 @@ const varifyAdmin = require('../middleware/varifyEmail')
 const adminRegister = async (req, res) => {
     try {
 
-        const { walletAddress, name, email } = req.body
+        const { error } = await validation(req.body);
 
-        if (!walletAddress || !name || !email) {
-            res.status(200).json({ success: false, msg: "invalid parameters" })
-
+        if (error) {
+            res.status(400).json({ error: error.message })
         } else {
 
-            const check = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' } })
 
-            if (!check) {
-                // creating admin 
-                const newAdmin = modles.adminModel({
-                    walletAddress: walletAddress,
-                    name: name,
-                    email: email
-                })
+            const { walletAddress, name, email, phone } = req.body
+
+            if (!walletAddress || !name || !email || !phone) {
+
+                res.status(200).json({ success: false, msg: "invalid parameters" })
+
+            } else {
+                const check = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' } })
+
+                if (!check) {
+
+                    // creating admin 
+                    const newAdmin = modles.adminModel({
+                        walletAddress: walletAddress,
+                        name: name,
+                        email: email,
+                        phone: phone
+                    })
 
 
-                // Send Varification Email
-                var subject = 'Varify Email Address'
-                var emailTo = newAdmin.email
-                var message =  `<h2>Hi Mr ${newAdmin.name}</h2> <br> click link below to varify the email address and be the Admin of OZean NFT MarketPlace.<br>
+                    // Send Varification Email
+                    var subject = 'Varify Email Address'
+                    var emailTo = newAdmin.email
+                    var message = `<h2>Hi Mr ${newAdmin.name}</h2> <br> click link below to varify the email address and be the Admin of OZean NFT MarketPlace.<br>
                     <a href="http://localhost:3000/api/varify-admin/${newAdmin._id}">http://localhost:3000/api/varify-admin/${newAdmin._id}</a>
                 `
 
-                // sendnig email to varify Email
-                varifyAdmin(subject, emailTo, message)
-                
+                    // sendnig email to varify Email
+                    varifyAdmin(subject, emailTo, message)
 
-                // admin save here
-                await newAdmin.save()
 
-                // sending response
-                res.status(200).json({ success: true, msg: "admin registered successfully" })
+                    // admin save here
+                    await newAdmin.save()
 
-            } else {
-                res.status(500).json({ success: false, msg: "with this walletAddress admin already exist" })
+                    // sending response
+                    res.status(200).json({ success: true, msg: "admin registered successfully" })
+
+                } else {
+                    res.status(500).json({ success: false, msg: "with this walletAddress admin already exist" })
+                }
             }
         }
-
     } catch (error) {
-        console.log(error)
+
         res.status(500).json({ success: false, msg: "something went wrong in server", error: error })
     }
 }
@@ -67,28 +76,28 @@ const adminRegister = async (req, res) => {
 
 
 
-const varifyEmail = async (req,res)=>{
+const varifyEmail = async (req, res) => {
     try {
-        
+
         var adminID = req.params.id;
         console.log(adminID)
-        var findAdmin = await modles.adminModel.findOne({_id : adminID})
+        var findAdmin = await modles.adminModel.findOne({ _id: adminID })
 
 
-        if(findAdmin.isVarify == false){
+        if (findAdmin.isVarify == false) {
 
-            await modles.adminModel.findOneAndUpdate({_id : adminID, walletAddress : {'$regex': '^' + findAdmin.walletAddress + '$', '$options': 'i'}},{isVarify : true})
-            res.status(200).json({success : true, msg : "admin varified successfully"})
-            
-        }else{
-            
-            res.status(200).json({success : false, msg : "admin already varified"})
+            await modles.adminModel.findOneAndUpdate({ _id: adminID, walletAddress: { '$regex': '^' + findAdmin.walletAddress + '$', '$options': 'i' } }, { isVarify: true })
+            res.status(200).json({ success: true, msg: "admin varified successfully" })
+
+        } else {
+
+            res.status(200).json({ success: false, msg: "admin already varified" })
         }
 
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({success:false, msg : "server Error " })
+        res.status(500).json({ success: false, msg: "server Error " })
     }
 }
 
@@ -112,27 +121,33 @@ const updateAdmin = async (req, res) => {
 
     try {
 
-        // checking if admin exist with this wallet address or not
-        const check = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' } })
+        var { error } = validation(req.body)
+        if (error) {
 
-        if (!check) {
-            // if admin not so send this response
-            res.status(200).json({ success: false, msg: "with this wallet address admin does nott exist" })
+            res.status(400).json({ error: error.message })
+
         } else {
 
-            //  (if admin found)
+            // checking if admin exist with this wallet address or not
+            const check = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' } })
 
-            // updating admin here
-            await modles.adminModel.findOneAndUpdate({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': "i" } }, {
-                name: req.body.name,
-                email: req.body.email
-            })
+            if (!check) {
+                // if admin not so send this response
+                res.status(200).json({ success: false, msg: "with this wallet address admin does nott exist" })
+            } else {
 
-            // sending success response
-            res.status(200).json({ success: true, msg: "admin updated successfully" })
+                // (if admin found so udpate the admin)
+                // updating admin here
+
+                await modles.adminModel.findOneAndUpdate({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': "i" } }, {
+                   ...req.body
+                })
+
+                // sending success response
+                res.status(200).json({ success: true, msg: "admin updated successfully"})
+            }
+
         }
-
-
     } catch (error) {
         res.status(500).json({ success: false, msg: "something went wrong in server" })
     }
@@ -195,9 +210,9 @@ const getSingleAdmin = async (req, res) => {
         // const address = req.body.walletAddress;
         const address = req.admin;
         const currentAdmin = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + address + '$', '$options': 'i' } })
-        
 
-        res.status(200).json({ success: true,  data : currentAdmin})
+
+        res.status(200).json({ success: true, data: currentAdmin })
     } catch (error) {
         res.status(500).json({ succeess: false, msg: "something went wrong in server" })
     }
@@ -213,7 +228,7 @@ const getSingleAdmin = async (req, res) => {
 
 // admin login () 
 const adminLogin = async (req, res) => {
-    
+
     try {
         if (req.body.walletAddress) {
 
@@ -221,21 +236,21 @@ const adminLogin = async (req, res) => {
 
             if (adminData) {
 
-            if(adminData.isVarify != false){
+                if (adminData.isVarify != false) {
 
-                
-                // adding jsonweb Token
-                const token = jwt.sign({ walletAddress: adminData.walletAddress }, process.env.secretKey, {
-                    expiresIn: "12 hours"
-                })
 
-                res.status(200).json({token : token})
-                
-            }else{
+                    // adding jsonweb Token
+                    const token = jwt.sign({ walletAddress: adminData.walletAddress }, process.env.secretKey, {
+                        expiresIn: "12 hours"
+                    })
 
-                res.status(200).json({succeess : false, msg : "Kinldy varify your email address frist"})
-            
-            }
+                    res.status(200).json({ token: token })
+
+                } else {
+
+                    res.status(200).json({ succeess: false, msg: "Kinldy varify your email address frist" })
+
+                }
 
 
             } else {
@@ -263,7 +278,7 @@ const adminLogin = async (req, res) => {
 // object to export admin controllers
 const adminObj = {
     adminRegister: adminRegister,
-    varifyEmail : varifyEmail,
+    varifyEmail: varifyEmail,
     updateAdmin: updateAdmin,
     deleteAdmin: deleteAdmin,
     getAllAdmins: getAllAdmins,

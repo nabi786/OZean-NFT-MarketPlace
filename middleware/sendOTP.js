@@ -1,36 +1,26 @@
-const otpGenerator = require('otp-generator')
-var otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
 
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
 
-const Vonage = require('@vonage/server-sdk')
+// const {initializeApp} = require('firebase')
+// const {analytics} = require
 
-const vonage = new Vonage({
-  apiKey: process.env.API_KEY2,
-  apiSecret: process.env.API_Secret2
-})
+// const firebaseConfig = {
+//     apiKey: process.env.apiKey,
+//     authDomain: process.env.authDomain,
+//     projectId: process.env.projectId,
+//     storageBucket: process.env.storageBucket,
+//     messagingSenderId: process.env.messagingSenderId,
+//     appId: process.env.appId,
+//     measurementId: process.env.measurementId,
+//   }
 
+// // send Messages
+// const sendOTP = ()=>{
 
-// send Messages
-const sendOTP = ()=>{
-
-    const from = "Vonage APIs"
-    const to = "923423597787"
-    const text = 'Hi Dear, How are you, this message is just test purpose, so please do not take it serous'
-
-    vonage.message.sendSms(from, to, text, (err, responseData) => {
-        if (err) {
-            console.log(err);
-        } else {
-            if(responseData.messages[0]['status'] === "0") {
-                console.log("Message sent successfully.");
-            } else {
-                console.log(`Message failed with error: ${responseData.messages[0]['error-text']}`);
-            }
-        }
-    })
     
-}
+// }
 
 
-module.exports = sendOTP
+// module.exports = sendOTP
 
