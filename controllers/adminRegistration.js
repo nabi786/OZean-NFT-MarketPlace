@@ -16,7 +16,6 @@ const adminRegister = async (req, res) => {
             res.status(400).json({ error: error.message })
         } else {
 
-
             const { walletAddress, name, email, phone } = req.body
 
             if (!walletAddress || !name || !email || !phone) {
@@ -24,9 +23,12 @@ const adminRegister = async (req, res) => {
                 res.status(200).json({ success: false, msg: "invalid parameters" })
 
             } else {
-                const check = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' } })
+                const checkWalt = await modles.adminModel.findOne({walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' }})
+                const checkEml = await modles.adminModel.findOne({email: email})
+                const checkPhn = await modles.adminModel.findOne({phone: phone})
 
-                if (!check) {
+                         
+                if (!checkWalt && !checkEml  && !checkPhn) {
 
                     // creating admin 
                     const newAdmin = modles.adminModel({
@@ -35,7 +37,6 @@ const adminRegister = async (req, res) => {
                         email: email,
                         phone: phone
                     })
-
 
                     // Send Varification Email
                     var subject = 'Varify Email Address'
@@ -55,12 +56,13 @@ const adminRegister = async (req, res) => {
                     res.status(200).json({ success: true, msg: "admin registered successfully" })
 
                 } else {
-                    res.status(500).json({ success: false, msg: "with this walletAddress admin already exist" })
+                   
+                    res.status(500).json({ success: false, msg: "admin already exist with these creditionals" })
                 }
             }
         }
     } catch (error) {
-
+        console.log(error)
         res.status(500).json({ success: false, msg: "something went wrong in server", error: error })
     }
 }
@@ -233,6 +235,7 @@ const adminLogin = async (req, res) => {
         if (req.body.walletAddress) {
 
             var adminData = await modles.adminModel.findOne({ walletAddress: { '$regex': '^' + req.body.walletAddress + '$', '$options': 'i' } })
+
 
             if (adminData) {
 
