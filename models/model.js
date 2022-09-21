@@ -96,7 +96,11 @@ const adminSchema = mongoose.Schema({
 
     email: {
         type: String,
-        require: true
+        required: true
+    },
+    phone : {
+        type : String,
+        required : true
     },
     isVarify : {
         type : Boolean,

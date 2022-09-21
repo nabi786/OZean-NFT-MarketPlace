@@ -30,7 +30,6 @@ const varifyAdmin = async (subject, emailTo, message) => {
     });
 
 
-
 }
 
 

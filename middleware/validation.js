@@ -1,9 +1,22 @@
-const joi = require('joi')
+const Joi = require('joi')
 
 
-const validator = (data)=>{
-    const Schema = joi.object({
 
+
+// validation one for Admin
+const validation = (data) => {
+    const Schema = Joi.object({
+        name: Joi.string()
+            .alphanum()
+            .min(4)
+            .max(30)
+            .required(),
+        email: Joi.string()
+            .email()
+            .required(),
+        phone: Joi.string()
+            .min(11)
+            .required(),
 
     }).options({ allowUnknown: true })
 
@@ -11,4 +24,5 @@ const validator = (data)=>{
 }
 
 
-module.exports = validator
+
+module.exports = validation 
