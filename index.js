@@ -8,7 +8,7 @@ const sendMessage = require('./middleware/sendOTP')
 
 const express = require('express')
 const app = express()
-const PORT = 3000 || process.env.PORT
+const PORT = process.env.PORT || 3000;
 const morgan = require('morgan')
 const cors = require('cors')
 
@@ -82,6 +82,6 @@ app.get('/', async (req, res) => {
 
 
 // listening app on this port number (this is server)
-app.listen(PORT, () => {
+app.listen(PORT,"0.0.0.0", () => {
     console.log(`server started successfully on PORT Number ${process.env.PORT}`)
 })
