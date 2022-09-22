@@ -4,7 +4,6 @@ require('./config/database')
 
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
-const sendMessage = require('./middleware/sendOTP')
 
 const express = require('express')
 const app = express()
@@ -30,7 +29,7 @@ const options = {
         },
         servers: [
             {
-                url: `https://localhost:${PORT}/`
+                url: `https://test-ozean-app.herokuapp.com`
             }
         ]
 
@@ -46,7 +45,7 @@ app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'))
-app.use(cors())
+
 
 // IMPORTING Routes
 const profileRoute = require('./routers/profile')
@@ -64,6 +63,7 @@ app.use('/api', nftRouter)
 app.use('/api', viewAndLikes)
 app.use(IndexRouter)
 
+app.use(cors())
 
 // express fiel uploads
 
