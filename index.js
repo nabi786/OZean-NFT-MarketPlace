@@ -73,13 +73,13 @@ app.use(cors())
 
 
 // Routes that not found in this app
-// app.get('/', async (req, res) => {
-//     try {
-//         res.status(200).json({ msg: "Eden Fort Backend working successfully" })
-//     } catch (err) {
-//         res.status(500).json({ msg: "server error" })
-//     }
-// })
+app.get('/', async (req, res) => {
+    try {
+        res.status(200).json({ msg: "Eden Fort Backend working successfully" })
+    } catch (err) {
+        res.status(500).json({ msg: "server error" })
+    }
+})
 
 
 
