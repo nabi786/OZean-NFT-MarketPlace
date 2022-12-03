@@ -164,8 +164,7 @@ const deleteCollection = async (req, res) => {
 
             // findOne and Delete
             await models.collectionModel.findOneAndDelete({ _id: req.params.collectionID })
-
-
+            
             var idsAry = userModel.Collections
             var findIndex = idsAry.indexOf(req.params.collectionID)
             idsAry.splice(findIndex, 1)
