@@ -1,6 +1,6 @@
 
 require('dotenv').config()
-// require('./config/database')
+require('./config/database')
 
 
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -50,20 +50,20 @@ app.use(morgan('dev'))
 
 
 // IMPORTING Routes
-// const profileRoute = require('./routers/profile')
-// const adminRegistration = require('./routers/adminRegistration')
-// const collectionRoutes = require('./routers/collections')
-// const nftRouter = require('./routers/NFTRoutes')
-// const viewAndLikes = require("./routers/likesAndFollow.js")
-// const IndexRouter = require('./routers/indexRoute')
+const profileRoute = require('./routers/profile')
+const adminRegistration = require('./routers/adminRegistration')
+const collectionRoutes = require('./routers/collections')
+const nftRouter = require('./routers/NFTRoutes')
+const viewAndLikes = require("./routers/likesAndFollow.js")
+const IndexRouter = require('./routers/indexRoute')
 
-// // USE ROUTES AS GLOBARL MIDDLEWARE
-// app.use('/api', profileRoute)
-// app.use('/api', adminRegistration)
-// app.use('/api', collectionRoutes)
-// app.use('/api', nftRouter)
-// app.use('/api', viewAndLikes)
-// app.use(IndexRouter)
+// USE ROUTES AS GLOBARL MIDDLEWARE
+app.use('/api', profileRoute)
+app.use('/api', adminRegistration)
+app.use('/api', collectionRoutes)
+app.use('/api', nftRouter)
+app.use('/api', viewAndLikes)
+app.use(IndexRouter)
 
 app.use(cors())
 
