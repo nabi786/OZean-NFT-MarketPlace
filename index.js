@@ -8,6 +8,7 @@ const swaggerUI = require('swagger-ui-express')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000;
+// const PORT =  3000;
 const morgan = require('morgan')
 const cors = require('cors')
 
@@ -29,7 +30,7 @@ const options = {
         },
         servers: [
             {
-                url: `https://test-ozean-app.herokuapp.com`
+                url: `http://localhost:3000/${PORT}`
             }
         ]
 
@@ -71,17 +72,19 @@ app.use(cors())
 
 
 // Routes that not found in this app
-app.get('/', async (req, res) => {
-    try {
-        res.status(200).json({ msg: "Ozean backend is working successfully" })
-    } catch (err) {
-        res.status(500).json({ msg: "server error" })
-    }
-})
+// app.get('/', async (req, res) => {
+//     try {
+//         res.status(200).json({ msg: "Eden Fort Backend working successfully" })
+//     } catch (err) {
+//         res.status(500).json({ msg: "server error" })
+//     }
+// })
 
 
 
 // listening app on this port number (this is server)
 app.listen(PORT,"0.0.0.0", () => {
-    console.log(`server started successfully on PORT Number ${process.env.PORT}`)
+// app.listen(PORT,() => {
+    // console.log(`server started successfully on PORT Number ${process.env.PORT}`)
+    console.log(`server started successfully on PORT Number ${PORT}`)
 })

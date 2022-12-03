@@ -42,8 +42,7 @@ const adminRegister = async (req, res) => {
                     var subject = 'Varify Email Address'
                     var emailTo = newAdmin.email
                     var message = `<h2>Hi Mr ${newAdmin.name}</h2> <br> click link below to varify the email address and be the Admin of OZean NFT MarketPlace.<br>
-                    <a href="http://localhost:3000/api/varify-admin/${newAdmin._id}">http://localhost:3000/api/varify-admin/${newAdmin._id}</a>
-                `
+                    <a href="http://localhost:3000/api/varify-admin/${newAdmin._id}">http://localhost:3000/api/varify-admin/${newAdmin._id}</a>`
 
                     // sendnig email to varify Emails
                     varifyAdmin(subject, emailTo, message)
@@ -56,8 +55,20 @@ const adminRegister = async (req, res) => {
                     res.status(200).json({ success: true, msg: "admin registered successfully" })
 
                 } else {
-                   
-                    res.status(500).json({ success: false, msg: "admin already exist with these creditionals" })
+                    
+                    var val = ""
+                    if(checkWalt){
+                        val = '(walletAddress)'
+                    }
+                    var val1 = ""
+                    if(checkEml){
+                        val1 = '(Email)'
+                    }
+                    var varl2 = ""
+                    if(checkPhn){
+                        varl2 = '(phone)'
+                    }
+                    res.status(400).json({ success: false, msg: `admin already exist with these creditionals ${val} ${val1} ${varl2}` })
                 }
             }
         }
