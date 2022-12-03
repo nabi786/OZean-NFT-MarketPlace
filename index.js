@@ -1,6 +1,6 @@
 
 require('dotenv').config()
-require('./config/database')
+// require('./config/database')
 
 
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -8,7 +8,7 @@ const swaggerUI = require('swagger-ui-express')
 
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 3000;
+const PORT = 5000;
 // const PORT =  3000;
 const morgan = require('morgan')
 const cors = require('cors')
