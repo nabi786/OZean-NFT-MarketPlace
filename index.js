@@ -22,26 +22,26 @@ const cors = require('cors')
 
 
 app.use(express.json())
-const options = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'Ozean NFT MarketPlace',
-            version: '1.0.0'
-        },
-        servers: [
-            {
-                url: `http://localhost:3000/${PORT}`
-            }
-        ]
+// const options = {
+//     definition: {
+//         openapi: '3.0.0',
+//         info: {
+//             title: 'Ozean NFT MarketPlace',
+//             version: '1.0.0'
+//         },
+//         servers: [
+//             {
+//                 url: `http://localhost:3000/${PORT}`
+//             }
+//         ]
 
-    },
-    apis : ['./routers/*.js']
-}
+//     },
+//     apis : ['./routers/*.js']
+// }
 
-const swaggerSpac = swaggerJsDoc(options)
-// const bodyParser = require('body-parser')
-app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
+// const swaggerSpac = swaggerJsDoc(options)
+// // const bodyParser = require('body-parser')
+// app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
 
 
 
@@ -50,20 +50,20 @@ app.use(morgan('dev'))
 
 
 // IMPORTING Routes
-const profileRoute = require('./routers/profile')
-const adminRegistration = require('./routers/adminRegistration')
-const collectionRoutes = require('./routers/collections')
-const nftRouter = require('./routers/NFTRoutes')
-const viewAndLikes = require("./routers/likesAndFollow.js")
-const IndexRouter = require('./routers/indexRoute')
+// const profileRoute = require('./routers/profile')
+// const adminRegistration = require('./routers/adminRegistration')
+// const collectionRoutes = require('./routers/collections')
+// const nftRouter = require('./routers/NFTRoutes')
+// const viewAndLikes = require("./routers/likesAndFollow.js")
+// const IndexRouter = require('./routers/indexRoute')
 
-// USE ROUTES AS GLOBARL MIDDLEWARE
-app.use('/api', profileRoute)
-app.use('/api', adminRegistration)
-app.use('/api', collectionRoutes)
-app.use('/api', nftRouter)
-app.use('/api', viewAndLikes)
-app.use(IndexRouter)
+// // USE ROUTES AS GLOBARL MIDDLEWARE
+// app.use('/api', profileRoute)
+// app.use('/api', adminRegistration)
+// app.use('/api', collectionRoutes)
+// app.use('/api', nftRouter)
+// app.use('/api', viewAndLikes)
+// app.use(IndexRouter)
 
 app.use(cors())
 
