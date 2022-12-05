@@ -39,7 +39,6 @@ const options = {
 }
 
 const swaggerSpac = swaggerJsDoc(options)
-// const bodyParser = require('body-parser')
 app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
 
 
@@ -71,12 +70,8 @@ app.use(cors())
 
 
 
-
-
-
-
 // listening app on this port number (this is server)
-app.listen(PORT,"0.0.0.0", () => {
+app.listen(PORT,"0,0,0,0", () => {
 // app.listen(PORT,() => {
     // console.log(`server started successfully on PORT Number ${process.env.PORT}`)
     console.log(`server started successfully on PORT Number ${PORT}`)
