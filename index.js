@@ -8,8 +8,7 @@ const swaggerUI = require('swagger-ui-express')
 
 const express = require('express')
 const app = express()
-const PORT = 5000;
-// const PORT =  3000;
+const PORT = process.env.PORT;
 const morgan = require('morgan')
 const cors = require('cors')
 
@@ -22,26 +21,26 @@ const cors = require('cors')
 
 
 app.use(express.json())
-// const options = {
-//     definition: {
-//         openapi: '3.0.0',
-//         info: {
-//             title: 'Ozean NFT MarketPlace',
-//             version: '1.0.0'
-//         },
-//         servers: [
-//             {
-//                 url: `http://localhost:3000/${PORT}`
-//             }
-//         ]
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Eden Fort MarkeetPlace',
+            version: '1.0.0'
+        },
+        servers: [
+            {
+                url: `http://localhost:${PORT}`
+            }
+        ]
 
-//     },
-//     apis : ['./routers/*.js']
-// }
+    },
+    apis : ['./routers/*.js']
+}
 
-// const swaggerSpac = swaggerJsDoc(options)
-// // const bodyParser = require('body-parser')
-// app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
+const swaggerSpac = swaggerJsDoc(options)
+// const bodyParser = require('body-parser')
+app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
 
 
 
@@ -72,14 +71,7 @@ app.use(cors())
 
 
 
-// Routes that not found in this app
-app.get('/', async (req, res) => {
-    try {
-        res.status(200).json({ msg: "Eden Fort Backend working successfully" })
-    } catch (err) {
-        res.status(500).json({ msg: "server error" })
-    }
-})
+
 
 
 
