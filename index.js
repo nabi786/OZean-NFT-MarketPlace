@@ -2,10 +2,11 @@
 require('dotenv').config()
 require('./config/database')
 
-
+// woring
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 
+// working
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT;
