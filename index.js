@@ -9,16 +9,19 @@ const swaggerUI = require('swagger-ui-express')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT;
+// const PORT = 5000;
 const morgan = require('morgan')
 const cors = require('cors')
-
+// Import modules
+const favicon = require('serve-favicon');
 
 
 // send messate for just test
 
 
 
-
+// Returns a middleware to serve favicon
+// app.use(favicon(__dirname + '/favicon.png'));
 
 app.use(express.json())
 const options = {
